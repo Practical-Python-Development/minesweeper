@@ -37,6 +37,7 @@ class Board:
 
         self.board = self.init_board()
         self.place_mines()
+        self.calculate_neighbor_mines()
 
     def init_board(self) -> list[list[Cell]]:
         """Initialize the board."""
@@ -52,6 +53,19 @@ class Board:
 
         for (mx, my) in mine_positions:
             self.cell_at_position(mx, my).is_mine = True
+
+    def calculate_neighbor_mines(self) -> None:
+        """
+        For each non-mine cell, count how many of its neighbors contain a mine,
+        and set neighbor_mines accordingly.
+        """
+        for row in range(self.height):
+            for col in range(self.width):
+                cell = self.cell_at_position(row, col)
+                if cell.is_mine:
+                    continue
+                neighbors = self._get_neighbors(col, row)
+                cell.num_of_neighbor_mines = sum(1 for n in neighbors if n.is_mine)
 
     @property
     @lru_cache
@@ -80,3 +94,18 @@ class Board:
         grid_x, grid_y = self.world2grid(mouse_pos)
         target_cell = self.cell_at_position(grid_x, grid_y)
         target_cell.toggle_flag()
+
+    def _get_neighbors(self, x: int, y: int) -> list[Cell]:
+        """
+        Return a list of neighboring Cell objects around (x, y).
+        Includes up to 8 neighbors, excluding out‐of‐bounds and (x,y) itself.
+        """
+        neighbors: list[Cell] = []
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                if dx == 0 and dy == 0:
+                    continue
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < self.width and 0 <= ny < self.height:
+                    neighbors.append(self.cell_at_position(ny, nx))
+        return neighbors

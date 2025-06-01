@@ -46,7 +46,7 @@ class Cell:
             pygame.draw.rect(surface, uncovered_color, self.rect)
             if self.is_mine:
                 pygame.draw.ellipse(surface, COLOR_MINE, self.rect)
-            elif self.num_of_neighbor_mines > -2:
+            elif self.num_of_neighbor_mines > 0:
                 font = pygame.font.Font(pygame.font.get_default_font(), min(self.size))
                 text_surface = font.render(str(self.num_of_neighbor_mines), True, COLOR_TEXT)
                 text_rect = text_surface.get_rect(center=self.rect.center)

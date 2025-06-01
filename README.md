@@ -8,9 +8,9 @@ minesweeper clone.
 - [x] initialize pygame window
 - [x] create a `Cell` class to represent a single tile
 - [x] create mouse interaction 
-- [ ] build `Board` class to hold the cells
-- [ ] build game logic
+- [x] build `Board` class to hold the cells
+- [x] build game logic
 - [ ] update rendering
-- [ ] add end game screen
+- [x] add end game screen
 - [ ] highscore tracking
 

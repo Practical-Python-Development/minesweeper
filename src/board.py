@@ -40,6 +40,7 @@ class Board:
         self.calculate_neighbor_mines()
 
         self.game_over = False
+        self.solved = False
 
     def init_board(self) -> list[list[Cell]]:
         """Initialize the board."""
@@ -98,10 +99,33 @@ class Board:
 
         if cell.is_mine:
             self.game_over = True
+            self.reveal_all_mines()
             return
 
         if cell.num_of_neighbor_mines == 0:
             self._flood_fill(cell)
+
+        if self.all_safe_cells_revealed():
+            self.game_over = True
+            self.solved = True
+            self.reveal_all_mines()
+
+    def all_safe_cells_revealed(self) -> bool:
+        """
+        Return True if every cell that is not a mine has been revealed.
+        """
+        for cell in itertools.chain(*self.board):
+            if not cell.is_mine and not cell.revealed:
+                return False
+        return True
+
+    def reveal_all_mines(self) -> None:
+        """
+        Reveal every mine (called when game over).
+        """
+        for cell in itertools.chain(*self.board):
+            if cell.is_mine:
+                cell.reveal()
 
     def toggle_flag_cell(self, mouse_pos: tuple[int, int]) -> None:
         grid_x, grid_y = self.world2grid(mouse_pos)

@@ -44,8 +44,6 @@ def main():
                 elif event.button == 3:
                     board.toggle_flag_cell(mouse_pos)
 
-        screen.fill((200, 200, 200))
-
         board.draw(screen)
 
         pygame.display.flip()

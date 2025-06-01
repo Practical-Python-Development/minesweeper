@@ -17,7 +17,7 @@ class Cell:
         self.y = y
         self.size = size
 
-        self.is_covered = True
+        self.revealed = False
         self.flagged = False
         self.is_mine = False
 
@@ -38,7 +38,7 @@ class Cell:
         COLOR_FLAG = (255, 0, 0)
         COLOR_MINE = (0, 255, 0)
 
-        if self.is_covered:
+        if self.revealed:
             pygame.draw.rect(surface, default_color, self.rect)
         else:
             pygame.draw.rect(surface, uncovered_color, self.rect)
@@ -58,7 +58,7 @@ class Cell:
 
     def uncover(self):
         """Uncover the cell."""
-        self.is_covered = False
+        self.revealed = False
 
     def toggle_flag(self):
         self.flagged = not self.flagged

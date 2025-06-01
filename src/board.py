@@ -2,6 +2,7 @@
 
 import itertools
 from functools import lru_cache
+import random
 
 import pygame
 
@@ -35,10 +36,22 @@ class Board:
         self.screen_width = screen_width
 
         self.board = self.init_board()
+        self.place_mines()
 
     def init_board(self) -> list[list[Cell]]:
         """Initialize the board."""
         return [[Cell(x, y, self.cell_size) for x in range(self.width)] for y in range(self.height)]
+
+    def place_mines(self) -> None:
+        """
+        Randomly choose num_mines distinct positions on the board
+        and set those cells’ is_mine = True.
+        """
+        all_positions = [(col, row) for row in range(self.height) for col in range(self.width)]
+        mine_positions = random.sample(all_positions, self.num_mines)
+
+        for (mx, my) in mine_positions:
+            self.cell_at_position(mx, my).is_mine = True
 
     @property
     @lru_cache

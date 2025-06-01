@@ -1,7 +1,6 @@
 """Main module to run the game from."""
 import pygame
 
-from cell import Cell
 from board import Board
 
 SCREEN_WIDTH = 600

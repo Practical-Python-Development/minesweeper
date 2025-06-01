@@ -19,6 +19,7 @@ class Cell:
 
         self.is_covered = True
         self.flagged = False
+        self.is_mine = False
 
     @property
     def rect(self) -> pygame.Rect:
@@ -35,9 +36,14 @@ class Cell:
         default_color = pygame.Color(64, 64, 64)
         uncovered_color = pygame.Color(0, 0, 0)
         COLOR_FLAG = (255, 0, 0)
+        COLOR_MINE = (0, 255, 0)
 
-        color = default_color if self.is_covered else uncovered_color
-        pygame.draw.rect(surface, color, self.rect)
+        if self.is_covered:
+            pygame.draw.rect(surface, default_color, self.rect)
+        else:
+            pygame.draw.rect(surface, uncovered_color, self.rect)
+            if self.is_mine:
+                pygame.draw.ellipse(surface, COLOR_MINE, self.rect)
 
         if self.flagged:
             points = [

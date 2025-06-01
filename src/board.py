@@ -86,9 +86,15 @@ class Board:
         return position[0] // self.cell_size[0], position[1] // self.cell_size[1]
 
     def cell_at_position(self, x: int, y: int) -> Cell:
+        """Return cell at given position."""
         return self.board[y][x]
 
     def reveal_cell(self, mouse_pos: tuple[int, int]) -> None:
+        """
+        Reveal cell at given mouse position.
+
+        Mouse position is given as a tuple of int in pixel coordinates.
+        """
         grid_x, grid_y = self.world2grid(mouse_pos)
         cell = self.cell_at_position(grid_x, grid_y)
 
@@ -128,6 +134,7 @@ class Board:
                 cell.reveal()
 
     def toggle_flag_cell(self, mouse_pos: tuple[int, int]) -> None:
+        """Toggle flag cell."""
         grid_x, grid_y = self.world2grid(mouse_pos)
         target_cell = self.cell_at_position(grid_x, grid_y)
         target_cell.toggle_flag()

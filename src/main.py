@@ -46,6 +46,18 @@ def main():
 
         board.draw(screen)
 
+        if board.game_over:
+            overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+            overlay.set_alpha(180)
+            overlay.fill((0, 0, 0))
+            screen.blit(overlay, (0, 0))
+
+            msg = "You Win!" if board.solved else "Game Over!"
+            font = pygame.font.Font(pygame.font.get_default_font(), 48)
+            text_surf = font.render(msg, True, (255, 255, 255))
+            text_rect = text_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+            screen.blit(text_surf, text_rect)
+
         pygame.display.flip()
         clock.tick(60)
 

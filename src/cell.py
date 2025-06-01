@@ -5,16 +5,19 @@ import pygame
 
 class Cell:
     """Cell class for minesweeper."""
-    def __init__(self, x: int, y: int, size: float = 200):
+    def __init__(self, x: int, y: int, size: float):
         """
         A single cell/tile of the board.
 
         :param x: x coordinate of the cell
         :param y: y coordinate of the cell
+        :param size: size of the cell
         """
         self.x = x
         self.y = y
         self.size = size
+
+        self.is_covered = True
 
     @property
     def rect(self) -> pygame.Rect:
@@ -24,4 +27,11 @@ class Cell:
     def draw(self, surface: pygame.Surface):
         """Draw the cell on the given surface."""
         default_color = pygame.Color(64, 64, 64)
-        pygame.draw.rect(surface, default_color, self.rect)
+        uncovered_color = pygame.Color(0, 0, 0)
+
+        color = default_color if self.is_covered else uncovered_color
+        pygame.draw.rect(surface, color, self.rect)
+
+    def uncover(self):
+        """Uncover the cell."""
+        self.is_covered = False

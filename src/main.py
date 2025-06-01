@@ -1,6 +1,8 @@
 """Main module to run the game from."""
 import pygame
 
+from cell import Cell
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
@@ -14,6 +16,8 @@ def main():
 
     clock = pygame.time.Clock()
 
+    cell = Cell(5, 5)
+
     running = True
     while running:
         for event in pygame.event.get():
@@ -21,6 +25,8 @@ def main():
                 running = False
 
         screen.fill((200, 200, 200))
+
+        cell.draw(screen)
 
         pygame.display.flip()
         clock.tick(60)

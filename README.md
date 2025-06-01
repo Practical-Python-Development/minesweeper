@@ -14,4 +14,4 @@ minesweeper clone.
 - [x] add end game screen
 - [ ] highscore tracking
 - [ ] reinit if initial cell is mine
-
+- [ ] restart game in end screen

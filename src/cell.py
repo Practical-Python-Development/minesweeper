@@ -5,6 +5,14 @@ import pygame
 
 class Cell:
     """Cell class for minesweeper."""
+
+    class Color:
+        DEFAULT = (64, 64, 64)
+        REVEALED = (0, 0, 0)
+        FLAG = (255, 0, 0)
+        MINE = (0, 255, 0)
+        TEXT = (0, 0, 255)  # ToDo depending of number of neighbours
+
     def __init__(self, x: int, y: int, size: tuple[int, int]):
         """
         A single cell/tile of the board.
@@ -34,21 +42,17 @@ class Cell:
 
     def draw(self, surface: pygame.Surface) -> None:
         """Draw the cell on the given surface."""
-        default_color = pygame.Color(64, 64, 64)
-        uncovered_color = pygame.Color(0, 0, 0)
-        COLOR_FLAG = (255, 0, 0)
-        COLOR_MINE = (0, 255, 0)
-        COLOR_TEXT = (0, 0, 255)
-
         if not self.revealed:
-            pygame.draw.rect(surface, default_color, self.rect)
+            pygame.draw.rect(surface, self.Color.DEFAULT, self.rect)
         else:
-            pygame.draw.rect(surface, uncovered_color, self.rect)
+            pygame.draw.rect(surface, self.Color.REVEALED, self.rect)
             if self.is_mine:
-                pygame.draw.ellipse(surface, COLOR_MINE, self.rect)
+                pygame.draw.ellipse(surface, self.Color.MINE, self.rect)
             elif self.num_of_neighbor_mines > 0:
                 font = pygame.font.Font(pygame.font.get_default_font(), min(self.size))
-                text_surface = font.render(str(self.num_of_neighbor_mines), True, COLOR_TEXT)
+                text_surface = font.render(
+                    str(self.num_of_neighbor_mines), True, self.Color.TEXT
+                )
                 text_rect = text_surface.get_rect(center=self.rect.center)
                 surface.blit(text_surface, text_rect)
 
@@ -58,7 +62,7 @@ class Cell:
                 (self.rect.left + self.size[0] * 0.7, self.rect.top + self.size[1] * 0.5),
                 (self.rect.left + self.size[0] * 0.3, self.rect.top + self.size[1] * 0.3),
             ]
-            pygame.draw.polygon(surface, COLOR_FLAG, points)
+            pygame.draw.polygon(surface, self.Color.FLAG, points)
 
         # draw boarder
         pygame.draw.rect(surface, (100, 100, 100), self.rect, 1)

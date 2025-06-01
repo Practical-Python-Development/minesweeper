@@ -4,8 +4,8 @@ This is an example project go showcase pygame by building a
 minesweeper clone.   
 
 ### Project steps:
-- [ ] create venv and dependency management
-- [ ] initialize pygame window
+- [x] create venv and dependency management
+- [x] initialize pygame window
 - [ ] create a `Cell` class to represent a single tile
 - [ ] create mouse interaction 
 - [ ] build `Board` class to hold the cells

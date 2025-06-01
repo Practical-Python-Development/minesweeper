@@ -6,8 +6,8 @@ minesweeper clone.
 ### Project steps:
 - [x] create venv and dependency management
 - [x] initialize pygame window
-- [ ] create a `Cell` class to represent a single tile
-- [ ] create mouse interaction 
+- [x] create a `Cell` class to represent a single tile
+- [x] create mouse interaction 
 - [ ] build `Board` class to hold the cells
 - [ ] build game logic
 - [ ] update rendering

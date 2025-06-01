@@ -36,6 +36,7 @@ class Cell:
 
         color = default_color if self.is_covered else uncovered_color
         pygame.draw.rect(surface, color, self.rect)
+        pygame.draw.rect(surface, (100, 100, 100), self.rect, 1)
 
     def uncover(self):
         """Uncover the cell."""

@@ -14,12 +14,12 @@ class Cell:
         """
         self.x = x
         self.y = y
-        self.size = 10
+        self.size = 200
 
     @property
     def rect(self) -> pygame.Rect:
         """Rect of the cell."""
-        return pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
+        return pygame.Rect(self.x, self.y, self.size, self.size)
 
     def draw(self, surface: pygame.Surface):
         """Draw the cell on the given surface."""

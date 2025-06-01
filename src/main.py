@@ -16,7 +16,7 @@ def main():
 
     clock = pygame.time.Clock()
 
-    cell = Cell(5, 5)
+    cell = Cell(300, 300)
 
     running = True
     while running:

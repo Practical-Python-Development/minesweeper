@@ -12,6 +12,11 @@ source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt   # requirements.txt contains: pygame
 ```
 
+## Usage
+```bash
+python src/main.py
+```
+
 ## Project steps:
 - [x] create venv and dependency management
 - [x] initialize pygame window

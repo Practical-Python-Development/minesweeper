@@ -12,7 +12,7 @@ minesweeper clone.
 - [x] build game logic
 - [ ] update rendering
 - [x] add end game screen
-- [ ] highscore tracking
 - [ ] reinit if initial cell is mine
 - [ ] restart game in end screen
 - [ ] color of text dependent of number of neighbours
+- [ ] add time and leaderboard

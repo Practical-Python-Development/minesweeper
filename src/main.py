@@ -3,8 +3,10 @@ import pygame
 
 from cell import Cell
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = SCREEN_WIDTH
+
+NUM_OF_CELLS = 3
 
 
 def main():
@@ -16,7 +18,8 @@ def main():
 
     clock = pygame.time.Clock()
 
-    cell = Cell(300, 300)
+    cell_size = SCREEN_WIDTH / NUM_OF_CELLS
+    cell = Cell(1, 1, cell_size)
 
     running = True
     while running:

@@ -5,7 +5,7 @@ import pygame
 
 class Cell:
     """Cell class for minesweeper."""
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int, size: float = 200):
         """
         A single cell/tile of the board.
 
@@ -14,12 +14,12 @@ class Cell:
         """
         self.x = x
         self.y = y
-        self.size = 200
+        self.size = size
 
     @property
     def rect(self) -> pygame.Rect:
         """Rect of the cell."""
-        return pygame.Rect(self.x, self.y, self.size, self.size)
+        return pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
 
     def draw(self, surface: pygame.Surface):
         """Draw the cell on the given surface."""

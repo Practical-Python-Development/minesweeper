@@ -15,3 +15,4 @@ minesweeper clone.
 - [ ] highscore tracking
 - [ ] reinit if initial cell is mine
 - [ ] restart game in end screen
+- [ ] color of text dependent of number of neighbours

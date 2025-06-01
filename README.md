@@ -1,9 +1,18 @@
 # minesweeper
 
 This is an example project go showcase pygame by building a
-minesweeper clone.   
+minesweeper clone.
 
-### Project steps:
+## Installation
+```bash
+git clone https://github.com/Practical-Python-Development/minesweeper.git
+cd minesweeper
+python3 -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+pip install -r requirements.txt   # requirements.txt contains: pygame
+```
+
+## Project steps:
 - [x] create venv and dependency management
 - [x] initialize pygame window
 - [x] create a `Cell` class to represent a single tile

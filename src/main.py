@@ -2,11 +2,13 @@
 import pygame
 
 from cell import Cell
+from board import Board
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = SCREEN_WIDTH
 
 NUM_OF_CELLS = 3
+NUM_MINES = 3
 
 
 def main():
@@ -18,8 +20,13 @@ def main():
 
     clock = pygame.time.Clock()
 
-    cell_size = SCREEN_WIDTH / NUM_OF_CELLS
-    cell = Cell(1, 1, cell_size)
+    board = Board(
+        NUM_OF_CELLS,
+        NUM_OF_CELLS,
+        NUM_MINES,
+        SCREEN_HEIGHT,
+        SCREEN_WIDTH,
+    )
 
     running = True
     while running:
@@ -34,11 +41,12 @@ def main():
                 # mouse_pos = pygame.mouse.get_pos()
                 # cell_x = mouse_pos[0] // cell_size
                 # cell_y = mouse_pos[1] // cell_size
-                cell.uncover()
+                # cell.uncover()
+                ...
 
         screen.fill((200, 200, 200))
 
-        cell.draw(screen)
+        board.draw(screen)
 
         pygame.display.flip()
         clock.tick(60)

@@ -37,7 +37,12 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                board.uncover(mouse_pos)
+                # left click
+                if event.button == 1:
+                    board.uncover(mouse_pos)
+                # right click
+                elif event.button == 3:
+                    board.toggle_flag(mouse_pos)
 
         screen.fill((200, 200, 200))
 

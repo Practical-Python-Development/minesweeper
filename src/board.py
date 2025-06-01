@@ -71,12 +71,12 @@ class Board:
     def cell_at_position(self, x: int, y: int) -> Cell:
         return self.board[y][x]
 
-    def uncover(self, mouse_pos: tuple[int, int]) -> None:
+    def uncover_cell(self, mouse_pos: tuple[int, int]) -> None:
         grid_x, grid_y = self.world2grid(mouse_pos)
         target_cell = self.cell_at_position(grid_x, grid_y)
         target_cell.uncover()
 
-    def toggle_flag(self, mouse_pos: tuple[int, int]) -> None:
+    def toggle_flag_cell(self, mouse_pos: tuple[int, int]) -> None:
         grid_x, grid_y = self.world2grid(mouse_pos)
         target_cell = self.cell_at_position(grid_x, grid_y)
         target_cell.toggle_flag()

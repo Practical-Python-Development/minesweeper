@@ -20,6 +20,7 @@ class Cell:
         self.revealed = False
         self.flagged = False
         self.is_mine = False
+        self.num_of_neighbor_mines = -1
 
     @property
     def rect(self) -> pygame.Rect:
@@ -37,13 +38,19 @@ class Cell:
         uncovered_color = pygame.Color(0, 0, 0)
         COLOR_FLAG = (255, 0, 0)
         COLOR_MINE = (0, 255, 0)
+        COLOR_TEXT = (0, 0, 255)
 
-        if self.revealed:
+        if not self.revealed:
             pygame.draw.rect(surface, default_color, self.rect)
         else:
             pygame.draw.rect(surface, uncovered_color, self.rect)
             if self.is_mine:
                 pygame.draw.ellipse(surface, COLOR_MINE, self.rect)
+            elif self.num_of_neighbor_mines > -2:
+                font = pygame.font.Font(pygame.font.get_default_font(), min(self.size))
+                text_surface = font.render(str(self.num_of_neighbor_mines), True, COLOR_TEXT)
+                text_rect = text_surface.get_rect(center=self.rect.center)
+                surface.blit(text_surface, text_rect)
 
         if self.flagged:
             points = [
@@ -58,7 +65,8 @@ class Cell:
 
     def uncover(self):
         """Uncover the cell."""
-        self.revealed = False
+        self.revealed = True
 
     def toggle_flag(self):
+        """Toggle the flag of the cell."""
         self.flagged = not self.flagged

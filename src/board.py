@@ -39,6 +39,8 @@ class Board:
         self.place_mines()
         self.calculate_neighbor_mines()
 
+        self.game_over = False
+
     def init_board(self) -> list[list[Cell]]:
         """Initialize the board."""
         return [[Cell(x, y, self.cell_size) for x in range(self.width)] for y in range(self.height)]
@@ -64,7 +66,7 @@ class Board:
                 cell = self.cell_at_position(row, col)
                 if cell.is_mine:
                     continue
-                neighbors = self._get_neighbors(col, row)
+                neighbors = self._get_neighbors(row, col)
                 cell.num_of_neighbor_mines = sum(1 for n in neighbors if n.is_mine)
 
     @property
@@ -85,10 +87,21 @@ class Board:
     def cell_at_position(self, x: int, y: int) -> Cell:
         return self.board[y][x]
 
-    def uncover_cell(self, mouse_pos: tuple[int, int]) -> None:
+    def reveal_cell(self, mouse_pos: tuple[int, int]) -> None:
         grid_x, grid_y = self.world2grid(mouse_pos)
-        target_cell = self.cell_at_position(grid_x, grid_y)
-        target_cell.uncover()
+        cell = self.cell_at_position(grid_x, grid_y)
+
+        if cell.revealed or cell.flagged:
+            return
+
+        cell.reveal()
+
+        if cell.is_mine:
+            self.game_over = True
+            return
+
+        if cell.num_of_neighbor_mines == 0:
+            self._flood_fill(cell)
 
     def toggle_flag_cell(self, mouse_pos: tuple[int, int]) -> None:
         grid_x, grid_y = self.world2grid(mouse_pos)
@@ -107,5 +120,32 @@ class Board:
                     continue
                 nx, ny = x + dx, y + dy
                 if 0 <= nx < self.width and 0 <= ny < self.height:
-                    neighbors.append(self.cell_at_position(ny, nx))
+                    neighbors.append(self.cell_at_position(nx, ny))
         return neighbors
+
+    def _flood_fill(self, start_cell: Cell) -> None:
+        """
+        Reveal all connected trivial cells.
+
+        Reveal all connected cells that have neighbor_mines == 0,
+        and their respective neighbours (to show border numbers).
+        """
+        stack = [start_cell]
+        visited = set()
+
+        while stack:
+            cur = stack.pop()
+            key = (cur.x, cur.y)
+            if key in visited:
+                continue
+            visited.add(key)
+
+            if not cur.revealed:
+                cur.reveal()
+
+            if cur.is_mine or cur.num_of_neighbor_mines != 0:
+                continue
+
+            for neighbor in self._get_neighbors(cur.x, cur.y):
+                if not neighbor.revealed and not neighbor.is_mine:
+                    stack.append(neighbor)

@@ -6,7 +6,7 @@ from board import Board
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = SCREEN_WIDTH
 
-NUM_OF_CELLS = 3
+NUM_OF_CELLS = 7
 NUM_MINES = 3
 
 
@@ -39,7 +39,7 @@ def main():
                 mouse_pos = pygame.mouse.get_pos()
                 # left click
                 if event.button == 1:
-                    board.uncover_cell(mouse_pos)
+                    board.reveal_cell(mouse_pos)
                 # right click
                 elif event.button == 3:
                     board.toggle_flag_cell(mouse_pos)

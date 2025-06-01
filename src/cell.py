@@ -63,7 +63,7 @@ class Cell:
         # draw boarder
         pygame.draw.rect(surface, (100, 100, 100), self.rect, 1)
 
-    def uncover(self):
+    def reveal(self):
         """Uncover the cell."""
         self.revealed = True
 

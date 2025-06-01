@@ -6,8 +6,8 @@ from board import Board
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = SCREEN_WIDTH
 
-NUM_OF_CELLS = 7
-NUM_MINES = 3
+NUM_OF_CELLS = 8
+NUM_MINES = 10
 
 
 def main():

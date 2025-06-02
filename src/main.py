@@ -39,7 +39,7 @@ def main():
                     continue
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if board.game_over:  # left click to play again
+                    if board.game_over:  # click to play again
                         repeat = True
                         running = False
                         continue
@@ -65,7 +65,7 @@ def main():
                 msg_rect = msg_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
                 screen.blit(msg_surf, msg_rect)
 
-                prompt = "Left click to play again."
+                prompt = "Click to play again."
                 font_prompt = pygame.font.Font(pygame.font.get_default_font(), 20)
                 prompt_surf = font_prompt.render(prompt, True, (255, 255, 255))
                 prompt_rect = prompt_surf.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 42))

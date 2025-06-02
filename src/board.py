@@ -172,6 +172,7 @@ class Board:
             visited.add(key)
 
             if not cur.revealed:
+                cur.flagged = False  # unflag if flagged incorrectly
                 cur.reveal()
 
             if cur.is_mine or cur.num_of_neighbor_mines != 0:

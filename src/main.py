@@ -82,6 +82,8 @@ class GameHandler:
         overlay.fill((0, 0, 0))
         self.screen.blit(overlay, (0, 0))
 
+        # TODO: Make the Text come from the game and not the game_state
+        #  it should only represent the game state in the game handler
         msg = "You Win!" if game_state is GameState.WIN else "Game Over!"
         big_font = pygame.font.Font(pygame.font.get_default_font(), 48)
         text_surf = big_font.render(msg, True, (255, 255, 255))

@@ -1,7 +1,5 @@
 """Main module to run the game from."""
 
-from logging import Logger
-
 import pygame
 
 from minesweeper import (
@@ -218,7 +216,6 @@ class GameHandler:
 
 
 def main():
-    Logger("Game Flow", level="DEBUG")
     game_handler = GameHandler([MinesweeperEasy, MinesweeperMedium, MinesweeperHard])
     game_handler.run()
 

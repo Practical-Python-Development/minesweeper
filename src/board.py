@@ -44,17 +44,22 @@ class Board:
 
     def init_board(self) -> list[list[Cell]]:
         """Initialize the board."""
-        return [[Cell(x, y, self.cell_size) for x in range(self.width)] for y in range(self.height)]
+        return [
+            [Cell(x, y, self.cell_size) for x in range(self.width)]
+            for y in range(self.height)
+        ]
 
     def place_mines(self) -> None:
         """
         Randomly choose num_mines distinct positions on the board
         and set those cells’ is_mine = True.
         """
-        all_positions = [(col, row) for row in range(self.height) for col in range(self.width)]
+        all_positions = [
+            (x, y) for y in range(self.height) for x in range(self.width)
+        ]
         mine_positions = random.sample(all_positions, self.num_mines)
 
-        for (mx, my) in mine_positions:
+        for mx, my in mine_positions:
             self.cell_at_position(mx, my).is_mine = True
 
     def calculate_neighbor_mines(self) -> None:
@@ -62,12 +67,12 @@ class Board:
         For each non-mine cell, count how many of its neighbors contain a mine,
         and set neighbor_mines accordingly.
         """
-        for row in range(self.height):
-            for col in range(self.width):
-                cell = self.cell_at_position(row, col)
+        for y in range(self.height):
+            for x in range(self.width):
+                cell = self.cell_at_position(x, y)
                 if cell.is_mine:
                     continue
-                neighbors = self._get_neighbors(row, col)
+                neighbors = self._get_neighbors(x, y)
                 cell.num_of_neighbor_mines = sum(1 for n in neighbors if n.is_mine)
 
     @property

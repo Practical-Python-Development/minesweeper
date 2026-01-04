@@ -58,9 +58,18 @@ class Cell:
 
         if self.flagged:
             points = [
-                (self.rect.left + self.size[0] * 0.3, self.rect.top + self.size[1] * 0.7),
-                (self.rect.left + self.size[0] * 0.7, self.rect.top + self.size[1] * 0.5),
-                (self.rect.left + self.size[0] * 0.3, self.rect.top + self.size[1] * 0.3),
+                (
+                    self.rect.left + self.size[0] * 0.3,
+                    self.rect.top + self.size[1] * 0.7,
+                ),
+                (
+                    self.rect.left + self.size[0] * 0.7,
+                    self.rect.top + self.size[1] * 0.5,
+                ),
+                (
+                    self.rect.left + self.size[0] * 0.3,
+                    self.rect.top + self.size[1] * 0.3,
+                ),
             ]
             pygame.draw.polygon(surface, self.Color.FLAG, points)
 
